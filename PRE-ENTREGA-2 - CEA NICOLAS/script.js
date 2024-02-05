@@ -8,7 +8,7 @@ const promedio = calcularPromedio()
 superanMedia(promedio)
 
 function ingresarEquipos(){
-    let cantidadEquipos;
+    let cantidadEquipos
     do {
         cantidadEquipos = parseInt(prompt("Ingrese la cantidad de equipos que participan."))
         if (isNaN(cantidadEquipos)) {
