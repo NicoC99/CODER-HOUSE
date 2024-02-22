@@ -10,11 +10,102 @@
 
     </head>
     <body>
+      <div style="text-align: center;">
+        <h1 id="titulo" >SCORE-BOARD</h1>
+      </div>
+
+      <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-success" id="nuevaCompetencia">NUEVA COMPETENCIA</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success" id="verTablas">VER TABLAS</button>  
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success" id="cargarScores">CARGAR SCORES</button>
+            </div>
+        </div>
+      </div>
+      <div id="tablaContainer"></div>
+
+      <div class="container" id="formularioCompetencia" style="display: none;">
+            <form id="datosCompetencia">
+                <div class="form-group">
+                    <label for="nombre">Nombre de la competencia:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                </div>
+                
+                <div class="form-group">
+                  <select class="form-select" id="modalidad">
+                    <option selected>Indique la modalidad de la competencia</option>
+                    <option value="1">Individual</option>
+                    <option value="2">Duplas</option>
+                  </select>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label>Seleccione que categorías habrá:</label>
+                    <div>
+                        <input type="checkbox" id="principiante" name="categorias" value="principiante">
+                        <label for="opcion1">Principiante</label>
+                    </div>
+                            <div class="form-group" id="individualP" style="display: none;">
+                              <label for="indMujeresP">Indique la cantidad de mujeres:</label>
+                              <input type="number" class="form-control" id="indMujeresP" placeholder="">
+                              <label for="indHombresP">Indique la cantidad de hombres:</label>
+                              <input type="number" class="form-control" id="indHombresP" placeholder="">
+                            </div>
+                            <div class="form-group" id="duplasP" style="display: none;">
+                              <label for="duplasMujeresP">Indique la cantidad de duplas de mujeres:</label>
+                              <input type="number" class="form-control" id="duplasMujeresP" placeholder="">
+                              <label for="duplasHombresP">Indique la cantidad de duplas de hombres:</label>
+                              <input type="number" class="form-control" id="duplasHombresP" placeholder="">
+                            </div>
+                    <div>
+                        <input type="checkbox" id="intermedio" name="categorias" value="intermedio">
+                        <label for="opcion2">Intermedio</label>
+                    </div>
+                            <div class="form-group" id="individualI" style="display: none;">
+                              <label for="indMujeresI">Indique la cantidad de mujeres:</label>
+                              <input type="number" class="form-control" id="indMujeresI" placeholder="">
+                              <label for="indHombresI">Indique la cantidad de hombres:</label>
+                              <input type="number" class="form-control" id="indHombresI" placeholder="">
+                            </div>
+                            <div class="form-group" id="duplasP" style="display: none;">
+                              <label for="duplasMujeresI">Indique la cantidad de duplas de mujeres:</label>
+                              <input type="number" class="form-control" id="duplasMujeresI" placeholder="">
+                              <label for="duplasHombresI">Indique la cantidad de duplas de hombres:</label>
+                              <input type="number" class="form-control" id="duplasHombresI" placeholder="">
+                            </div>
+                    <div>
+                        <input type="checkbox" id="avanzado" name="categorias" value="avanzado">
+                        <label for="opcion3">Avanzado</label>
+                    </div>
+                          <div class="form-group" id="individualA" style="display: none;">
+                            <label for="indMujeresA">Indique la cantidad de mujeres:</label>
+                            <input type="number" class="form-control" id="indMujeresA" placeholder="">
+                            <label for="indHombresA">Indique la cantidad de hombres:</label>
+                            <input type="number" class="form-control" id="indHombresA" placeholder="">
+                          </div>
+                          <div class="form-group" id="duplasA" style="display: none;">
+                            <label for="duplasMujeresA">Indique la cantidad de duplas de mujeres:</label>
+                            <input type="number" class="form-control" id="duplasMujeresA" placeholder="">
+                            <label for="duplasHombresA">Indique la cantidad de duplas de hombres:</label>
+                            <input type="number" class="form-control" id="duplasHombresA" placeholder="">
+                          </div>
+                </div>
+                <div class="form-group">
+                  <label for="cantidadEventos">Indique la cantidad de eventos:</label>
+                  <input type="number" class="form-control" id="cantidadEventos" placeholder="">
+              </div>
+                <button type="submit" id="crearCompetencia">CREAR</button>
+            </form>
+      </div>
+
       
-        <h1 id="titulo">Registro de equipos y carga de puntajes</h1>
-    
-    
-    
+      
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="./script.js"></script>
     </body>

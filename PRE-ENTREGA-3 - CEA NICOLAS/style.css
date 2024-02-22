@@ -6,9 +6,60 @@ body {
 
 #titulo {
     color: #ffcc00;
-    text-align: center;
     font-size: 50px;
     font-weight: bold;
     margin-top: 30px;
     font-family: 'Arial', sans-serif;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 25px solid #ffcc00;
+    border-radius: 75px;
+    
+}
+
+.btn.btn-success {      
+    font-size: 20px;
+    margin-top: 50px;
+    font-weight: bold;
+    width: 250px;
+}
+
+#crearCompetencia{
+    font-size: 20px; 
+    margin-top: 5px; 
+    font-weight: bold;
+    width: 100%; 
+    background-color: #28a745; 
+    border-color: #28a745;
+    color: #fff; 
+}
+
+#formularioCompetencia {
+    margin-top: 50px;
+    background-color: #fff; 
+    padding: 20px; 
+    border-radius: 8px;
+    width: 400px;
+    margin-left: 10%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    background-color: lightgrey; 
+    margin-top: 30px;
+}
+
+td {
+    border: 5px solid black;
+    padding: 10px; 
+    text-align: center; 
 }
