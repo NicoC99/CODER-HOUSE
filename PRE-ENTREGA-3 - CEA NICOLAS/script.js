@@ -61,48 +61,48 @@ function crearCompetencia() {
 }
 //CREA LA TABLA PARA VER LOS PUNTAJES
 function crearTabla() {
-    let datos = JSON.parse(localStorage.getItem("competencia"));
-    let cantidadEventos = datos.cantidadEventos || [];
-    let tablaContainer = document.getElementById("tablaContainer");
+    let datos = JSON.parse(localStorage.getItem("competencia"))
+    let cantidadEventos = datos.cantidadEventos || []
+    let tablaContainer = document.getElementById("tablaContainer")
     for (let categoria = 0; categoria <= 2; categoria++) {
         if ((datos.categorias[categoria] === "principiante" || datos.categorias[categoria] === "intermedio" || datos.categorias[categoria] === "avanzado") && datos.categorias[categoria] != null) {
-            let sexo = ["Masculino", "Femenino"];
+            let sexo = ["Masculino", "Femenino"]
             for (let s = 0; s <= 1; s++) {
-                let atletas;
-                let puntajesAtletas = []; // Array separado para cada tabla
-                let tabla = document.createElement("table");
-                tabla.style.margin = "0 auto";
-                tabla.style.marginTop = "20px";
-                tabla.style.width = "80%";
-                tabla.style.fontFamily = "Arial, sans-serif";
-                let filaCategoria = document.createElement("tr");
-                let celdaCategoria = document.createElement("td");
-                celdaCategoria.style.fontWeight = "bold";
-                celdaCategoria.style.fontSize = "20px";
-                celdaCategoria.textContent = "Categoría " + datos.categorias[categoria] + " - " + sexo[s];
-                celdaCategoria.setAttribute("colspan", cantidadEventos + 3);
-                celdaCategoria.style.textAlign = "center";
-                filaCategoria.appendChild(celdaCategoria);
-                tabla.appendChild(filaCategoria);
-                let fila1 = document.createElement("tr");
-                let celdaModalidad = document.createElement("td");
-                celdaModalidad.textContent = datos.modalidad == 1 ? "Atleta" : "Equipo";
-                fila1.appendChild(celdaModalidad);
+                let atletas
+                let puntajesAtletas = []
+                let tabla = document.createElement("table")
+                tabla.style.margin = "0 auto"
+                tabla.style.marginTop = "20px"
+                tabla.style.width = "80%"
+                tabla.style.fontFamily = "Arial, sans-serif"
+                let filaCategoria = document.createElement("tr")
+                let celdaCategoria = document.createElement("td")
+                celdaCategoria.style.fontWeight = "bold"
+                celdaCategoria.style.fontSize = "20px"
+                celdaCategoria.textContent = "Categoría " + datos.categorias[categoria] + " - " + sexo[s]
+                celdaCategoria.setAttribute("colspan", cantidadEventos + 3)
+                celdaCategoria.style.textAlign = "center"
+                filaCategoria.appendChild(celdaCategoria)
+                tabla.appendChild(filaCategoria)
+                let fila1 = document.createElement("tr")
+                let celdaModalidad = document.createElement("td")
+                celdaModalidad.textContent = datos.modalidad == 1 ? "Atleta" : "Equipo"
+                fila1.appendChild(celdaModalidad)
                 for (let i = 1; i <= cantidadEventos; i++) {
-                    let celdaEvento = document.createElement("td");
-                    celdaEvento.textContent = "Puntos evento " + i;
-                    let celdaPosicion = document.createElement("td");
-                    celdaPosicion.textContent = "Posición";
-                    fila1.appendChild(celdaEvento);
-                    fila1.appendChild(celdaPosicion);
+                    let celdaEvento = document.createElement("td")
+                    celdaEvento.textContent = "Puntos evento " + i
+                    let celdaPosicion = document.createElement("td")
+                    celdaPosicion.textContent = "Posición"
+                    fila1.appendChild(celdaEvento)
+                    fila1.appendChild(celdaPosicion)
                 }
-                let celdaTotal = document.createElement("td");
-                celdaTotal.textContent = "Puntaje total";
-                fila1.appendChild(celdaTotal);
-                let celdaPosicion = document.createElement("td");
-                celdaPosicion.textContent = "Posición";
-                fila1.appendChild(celdaPosicion);
-                tabla.appendChild(fila1);
+                let celdaTotal = document.createElement("td")
+                celdaTotal.textContent = "Puntaje total"
+                fila1.appendChild(celdaTotal)
+                let celdaPosicion = document.createElement("td")
+                celdaPosicion.textContent = "Posición"
+                fila1.appendChild(celdaPosicion)
+                tabla.appendChild(fila1)
                 if(datos.modalidad == 1){
                     if (sexo[s] === "Masculino" && datos.categorias[categoria] === "principiante") {
                         atletas = datos.hombresPrincipiante
