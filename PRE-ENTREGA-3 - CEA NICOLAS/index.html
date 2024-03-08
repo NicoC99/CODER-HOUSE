@@ -53,15 +53,15 @@
                     </div>
                             <div class="form-group" id="individualP" style="display: none;">
                               <label for="indMujeresP">Indique la cantidad de mujeres:</label>
-                              <input type="number" class="form-control" id="indMujeresP" placeholder="">
+                              <input type="number" class="form-control" id="indMujeresP" placeholder="" min="0">
                               <label for="indHombresP">Indique la cantidad de hombres:</label>
-                              <input type="number" class="form-control" id="indHombresP" placeholder="">
+                              <input type="number" class="form-control" id="indHombresP" placeholder="" min="0">
                             </div>
                             <div class="form-group" id="duplasP" style="display: none;">
                               <label for="duplasMujeresP">Indique la cantidad de duplas de mujeres:</label>
-                              <input type="number" class="form-control" id="duplasMujeresP" placeholder="">
+                              <input type="number" class="form-control" id="duplasMujeresP" placeholder="" min="0">
                               <label for="duplasHombresP">Indique la cantidad de duplas de hombres:</label>
-                              <input type="number" class="form-control" id="duplasHombresP" placeholder="">
+                              <input type="number" class="form-control" id="duplasHombresP" placeholder="" min="0">
                             </div>
                     <div>
                         <input type="checkbox" id="intermedio" name="categorias" value="intermedio">
@@ -69,15 +69,15 @@
                     </div>
                             <div class="form-group" id="individualI" style="display: none;">
                               <label for="indMujeresI">Indique la cantidad de mujeres:</label>
-                              <input type="number" class="form-control" id="indMujeresI" placeholder="">
+                              <input type="number" class="form-control" id="indMujeresI" placeholder="" min="0">
                               <label for="indHombresI">Indique la cantidad de hombres:</label>
-                              <input type="number" class="form-control" id="indHombresI" placeholder="">
+                              <input type="number" class="form-control" id="indHombresI" placeholder="" min="0">
                             </div>
                             <div class="form-group" id="duplasP" style="display: none;">
                               <label for="duplasMujeresI">Indique la cantidad de duplas de mujeres:</label>
-                              <input type="number" class="form-control" id="duplasMujeresI" placeholder="">
+                              <input type="number" class="form-control" id="duplasMujeresI" placeholder="" min="0">
                               <label for="duplasHombresI">Indique la cantidad de duplas de hombres:</label>
-                              <input type="number" class="form-control" id="duplasHombresI" placeholder="">
+                              <input type="number" class="form-control" id="duplasHombresI" placeholder="" min="0">
                             </div>
                     <div>
                         <input type="checkbox" id="avanzado" name="categorias" value="avanzado">
@@ -85,20 +85,20 @@
                     </div>
                           <div class="form-group" id="individualA" style="display: none;">
                             <label for="indMujeresA">Indique la cantidad de mujeres:</label>
-                            <input type="number" class="form-control" id="indMujeresA" placeholder="">
+                            <input type="number" class="form-control" id="indMujeresA" placeholder=""min="0">
                             <label for="indHombresA">Indique la cantidad de hombres:</label>
-                            <input type="number" class="form-control" id="indHombresA" placeholder="">
+                            <input type="number" class="form-control" id="indHombresA" placeholder="" min="0">
                           </div>
                           <div class="form-group" id="duplasA" style="display: none;">
                             <label for="duplasMujeresA">Indique la cantidad de duplas de mujeres:</label>
-                            <input type="number" class="form-control" id="duplasMujeresA" placeholder="">
+                            <input type="number" class="form-control" id="duplasMujeresA" placeholder="" min="0">
                             <label for="duplasHombresA">Indique la cantidad de duplas de hombres:</label>
-                            <input type="number" class="form-control" id="duplasHombresA" placeholder="">
+                            <input type="number" class="form-control" id="duplasHombresA" placeholder="" min="0">
                           </div>
                 </div>
                 <div class="form-group">
                   <label for="cantidadEventos">Indique la cantidad de eventos:</label>
-                  <input type="number" class="form-control" id="cantidadEventos" placeholder="">
+                  <input type="number" class="form-control" id="cantidadEventos" placeholder="1" min="1">
               </div>
                 <button type="submit" id="crearCompetencia">CREAR</button>
             </form>
@@ -107,6 +107,8 @@
       
       
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="./script.js"></script>
     </body>
 </html>

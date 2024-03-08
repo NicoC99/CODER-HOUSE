@@ -58,6 +58,8 @@ function crearCompetencia() {
         localStorage.setItem("competencia", JSON.stringify(nuevaCompetencia))
         console.log(nuevaCompetencia) 
     } 
+    console.log("creando")
+    
 }
 //CREA LA TABLA PARA VER LOS PUNTAJES
 function crearTabla() {
@@ -170,15 +172,30 @@ function crearTabla() {
             }
         }
     }
-    localStorage.setItem("puntajes", JSON.stringify(puntajesAtletas))
+    
 }
+
+
+
+
 // VERIFICA SI HAY DATOS QUE SE PUEDAN BORRAR
 function hayDatosGuardados() {
     return localStorage.getItem("competencia") !== null
 }
 //PIDE EL OK PARA ELIMINAR AL CREAR NUEVA COMPETENCIA
 function confirmarEliminarDatos() {
-    return confirm("Al crear una nueva competencia se borrarán los datos de la competencia existente. ¿Estás seguro?")
+return swal.fire({
+        icon: 'warning',
+        title: '¿Estás seguro?',
+        text: 'Al crear una nueva competencia se borrarán los datos de la competencia existente.',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, estoy seguro',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        return result.isConfirmed;
+    });
 }
 // ELIMINA LOS DATOS DE LA COMPETENCIA PARA CREAR UNA NUEVA
 function eliminarDatosCompetencia() {
@@ -193,7 +210,29 @@ function eliminarTabla() {
 
 // DESACTIVAR EL BOTON PARA VER LA TABLA Y NO SE VUELVA A GENERAR
 function deshabilitarBotonVerTablas() {
+    console.log("Deshabilitar")
     document.getElementById("verTablas").disabled = true
+}
+
+function limpiarFormulario() {
+    document.getElementById("nombre").value = "";
+    document.getElementById("modalidad").value = "Indique la modalidad de la competencia";
+    document.querySelectorAll('input[name="categorias"]').forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+    document.getElementById("cantidadEventos").value = "";
+    document.getElementById("indHombresP").value = "";
+    document.getElementById("indMujeresP").value = "";
+    document.getElementById("duplasHombresP").value = "";
+    document.getElementById("duplasMujeresP").value = "";
+    document.getElementById("indHombresI").value = "";
+    document.getElementById("indMujeresI").value = "";
+    document.getElementById("duplasHombresI").value = "";
+    document.getElementById("duplasMujeresI").value = "";
+    document.getElementById("indHombresA").value = "";
+    document.getElementById("indMujeresA").value = "";
+    document.getElementById("duplasHombresA").value = "";
+    document.getElementById("duplasMujeresA").value = "";
 }
 
 function cargarScores(){
@@ -202,22 +241,40 @@ function cargarScores(){
 
 // PARA ABRIR EL FORMULARIO DE LOS DATOS DE LA COMPETENCIA
 document.getElementById("nuevaCompetencia").addEventListener("click", function() {
-    if (hayDatosGuardados() && !confirmarEliminarDatos()) {
-        return
+    if (hayDatosGuardados()) {
+        confirmarEliminarDatos().then((confirmed) => {
+            if (confirmed) {
+                eliminarTabla();
+                eliminarDatosCompetencia();
+                document.getElementById("verTablas").disabled = false
+                limpiarFormulario()
+                document.getElementById("formularioCompetencia").style.display = "block";
+            }
+        });
+    } else {
+        limpiarFormulario()
+        document.getElementById("formularioCompetencia").style.display = "block";
     }
-    eliminarTabla()
-    eliminarDatosCompetencia()
-    document.getElementById("formularioCompetencia").style.display = "block"
 });
-
 //PARA CREAR LA COMPETENCIA
-document.getElementById("crearCompetencia").addEventListener("click", crearCompetencia)
+document.getElementById("crearCompetencia").addEventListener("click", function(event) {
+    event.preventDefault()
+    crearCompetencia()
+    document.getElementById("formularioCompetencia").style.display = "none"
+    swal.fire({
+        icon: 'success',
+        title: 'Competencia creada',
+        showConfirmButton: false,
+        timer: 3000 // Duración del cartel en milisegundos (opcional)
+    })
+})
 
 // PARA GENERAR LA TABLA LUEGO DE CREAR LA COMPETENCIA
 document.getElementById("verTablas").addEventListener("click", function() {
     crearTabla()
     deshabilitarBotonVerTablas()
-});
+    
+})
 
 // PARA ABRIR Y CERRAR LOS DIVS EN LOS CUALES SE INDICAN LA CANTIDAD DE ATLETAS O EQUIPOS
 document.getElementById("modalidad").addEventListener("change", function() {
