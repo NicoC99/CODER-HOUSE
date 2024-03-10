@@ -20,7 +20,7 @@
                 <button type="button" class="btn btn-success" id="nuevaCompetencia">NUEVA COMPETENCIA</button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-success" id="verTablas">VER TABLAS</button>  
+                <button type="button" class="btn btn-success" id="verTablas" disabled>VER TABLAS</button>  
             </div>
             <div class="col">
                 <button type="button" class="btn btn-success" id="cargarScores">CARGAR SCORES</button>
@@ -101,13 +101,13 @@
                   <input type="number" class="form-control" id="cantidadEventos" placeholder="1" min="1">
               </div>
                 <button type="submit" id="crearCompetencia">CREAR</button>
+                <div id="mensajeError" style="color: red;"></div>
             </form>
       </div>
 
       
       
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="./script.js"></script>
     </body>

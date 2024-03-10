@@ -47,20 +47,12 @@ function crearCompetencia() {
         nuevaCompetencia.duplasHombresAvanzado = duplasHombresA
         nuevaCompetencia.duplasMujeresAvanzado = duplasMujeresA
     }
-
-    if (nuevaCompetencia.modalidad != 1 && nuevaCompetencia.modalidad != 2){
-        alert("Seleccione la modalidad de la competencia.")
-    } else if (nuevaCompetencia.cantidadEventos == ""){
-        alert("Indique la cantidad de eventos.")
-    } else if (nuevaCompetencia.categorias.length === 0){
-        alert ("Debe seleccionar al menos una categoría.")
-    } else {
-        localStorage.setItem("competencia", JSON.stringify(nuevaCompetencia))
-        console.log(nuevaCompetencia) 
-    } 
-    console.log("creando")
     
+    localStorage.setItem("competencia", JSON.stringify(nuevaCompetencia))
+    console.log(nuevaCompetencia) 
+    console.log("creando")
 }
+
 //CREA LA TABLA PARA VER LOS PUNTAJES
 function crearTabla() {
     let datos = JSON.parse(localStorage.getItem("competencia"))
@@ -141,7 +133,7 @@ function crearTabla() {
                         modalidad: datos.modalidad == 1 ? "Individual" : "Dupla",
                         numero: j,
                         puntajes: []
-                    };
+                    }
                     for (let i = 0; i < cantidadEventos; i++) {
                         atleta.puntajes.push(0)
                     }
@@ -159,7 +151,7 @@ function crearTabla() {
                         let celdaVacia = document.createElement("td")
                         celdaVacia.textContent = "-"
                         fila.appendChild(celdaVacia)
-                    });
+                    })
                     let celdaPuntajeTotal = document.createElement("td")
                     celdaPuntajeTotal.textContent = 0
                     fila.appendChild(celdaPuntajeTotal)
@@ -167,21 +159,18 @@ function crearTabla() {
                     celdaPosicionFinal.textContent = "-"
                     fila.appendChild(celdaPosicionFinal)
                     tabla.appendChild(fila)
-                });
+                })
                 tablaContainer.appendChild(tabla)
             }
         }
-    }
-    
+    }   
 }
-
-
-
 
 // VERIFICA SI HAY DATOS QUE SE PUEDAN BORRAR
 function hayDatosGuardados() {
     return localStorage.getItem("competencia") !== null
 }
+
 //PIDE EL OK PARA ELIMINAR AL CREAR NUEVA COMPETENCIA
 function confirmarEliminarDatos() {
 return swal.fire({
@@ -194,14 +183,16 @@ return swal.fire({
         confirmButtonText: 'Sí, estoy seguro',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
-        return result.isConfirmed;
-    });
+        return result.isConfirmed
+    })
 }
+
 // ELIMINA LOS DATOS DE LA COMPETENCIA PARA CREAR UNA NUEVA
 function eliminarDatosCompetencia() {
     localStorage.removeItem("competencia")
     localStorage.removeItem("puntajes")
 }
+
 //ELIMINA LA TABLA PARA CREAR UNA NUEVA
 function eliminarTabla() {
     let tablaContainer = document.getElementById("tablaContainer")
@@ -214,58 +205,76 @@ function deshabilitarBotonVerTablas() {
     document.getElementById("verTablas").disabled = true
 }
 
-function limpiarFormulario() {
-    document.getElementById("nombre").value = "";
-    document.getElementById("modalidad").value = "Indique la modalidad de la competencia";
-    document.querySelectorAll('input[name="categorias"]').forEach(function(checkbox) {
-        checkbox.checked = false;
-    });
-    document.getElementById("cantidadEventos").value = "";
-    document.getElementById("indHombresP").value = "";
-    document.getElementById("indMujeresP").value = "";
-    document.getElementById("duplasHombresP").value = "";
-    document.getElementById("duplasMujeresP").value = "";
-    document.getElementById("indHombresI").value = "";
-    document.getElementById("indMujeresI").value = "";
-    document.getElementById("duplasHombresI").value = "";
-    document.getElementById("duplasMujeresI").value = "";
-    document.getElementById("indHombresA").value = "";
-    document.getElementById("indMujeresA").value = "";
-    document.getElementById("duplasHombresA").value = "";
-    document.getElementById("duplasMujeresA").value = "";
-}
-
-function cargarScores(){
-
-}
-
 // PARA ABRIR EL FORMULARIO DE LOS DATOS DE LA COMPETENCIA
 document.getElementById("nuevaCompetencia").addEventListener("click", function() {
     if (hayDatosGuardados()) {
         confirmarEliminarDatos().then((confirmed) => {
             if (confirmed) {
-                eliminarTabla();
-                eliminarDatosCompetencia();
+                eliminarTabla()
+                eliminarDatosCompetencia()
                 document.getElementById("verTablas").disabled = false
-                limpiarFormulario()
-                document.getElementById("formularioCompetencia").style.display = "block";
+                document.getElementById("formularioCompetencia").style.display = "block"
+                document.getElementById("verTablas").disabled = true
             }
-        });
+        })
     } else {
-        limpiarFormulario()
-        document.getElementById("formularioCompetencia").style.display = "block";
+        document.getElementById("formularioCompetencia").style.display = "block"
     }
-});
-//PARA CREAR LA COMPETENCIA
+})
+
+//PARA CREAR LA COMPETENCIA VERIFICANDO CON UNA PROMESA QUE SE LLENEN TODOS LOS CAMPOS
 document.getElementById("crearCompetencia").addEventListener("click", function(event) {
     event.preventDefault()
-    crearCompetencia()
-    document.getElementById("formularioCompetencia").style.display = "none"
-    swal.fire({
-        icon: 'success',
-        title: 'Competencia creada',
-        showConfirmButton: false,
-        timer: 3000 // Duración del cartel en milisegundos (opcional)
+
+    const mensajeError = document.getElementById("mensajeError")
+
+    const verificarDatos = new Promise((resolve, reject) => {
+        const nombre = document.getElementById("nombre").value
+        const modalidad = document.getElementById("modalidad").value
+        const categorias = document.querySelectorAll('input[name="categorias"]:checked')
+        const cantidadEventos = document.getElementById("cantidadEventos").value
+        
+        if (nombre.trim() === "") {
+            reject(new Error("Debe indicar un nombre para la competencia."))
+        } else if (modalidad !== "1" && modalidad !== "2") {
+            reject(new Error("Seleccione una modalidad válida para la competencia."))
+        } else if (categorias.length === 0) {
+            reject(new Error("Debe seleccionar al menos una categoría para la competencia."))
+        } else if (cantidadEventos.trim() === "") {
+            reject(new Error("Debe indicar la cantidad de eventos para la competencia."))
+        } else {
+            resolve()
+        }
+    })
+
+    verificarDatos.then(() => {
+        crearCompetencia()
+        document.getElementById("formularioCompetencia").style.display = "none"
+        // USO DE FETCH PARA MOSTRAR A LA HORA QUE SE CREO LA COMPETENCIA
+            fetch('http://worldtimeapi.org/api/ip')
+            .then(response => response.json())
+            .then(data => {
+                const horaCreacion = new Date(data.datetime)
+                swal.fire({
+                    icon: 'info',
+                    title: 'Competencia creada',
+                    text: 'La hora a la que se creó la competencia es: ' + horaCreacion.toLocaleString(),
+                    showConfirmButton: false,
+                    timer: 3000,
+                })
+            })
+            .catch(error => {
+                console.error('Se produjo un error al obtener la hora:', error)
+            })
+        document.getElementById("nuevaCompetencia").disabled = true
+        setTimeout(function() {
+            document.getElementById("verTablas").disabled = false
+        }, 3000)
+        setTimeout(function() {
+            document.getElementById("nuevaCompetencia").disabled = false
+        }, 10000)
+    }).catch(error => {
+        mensajeError.textContent = error.message
     })
 })
 
@@ -273,7 +282,6 @@ document.getElementById("crearCompetencia").addEventListener("click", function(e
 document.getElementById("verTablas").addEventListener("click", function() {
     crearTabla()
     deshabilitarBotonVerTablas()
-    
 })
 
 // PARA ABRIR Y CERRAR LOS DIVS EN LOS CUALES SE INDICAN LA CANTIDAD DE ATLETAS O EQUIPOS
